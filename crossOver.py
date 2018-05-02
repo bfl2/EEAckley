@@ -44,8 +44,8 @@ def recombination_all_random(all_parents):
     size = len(all_parents)
 
     for i in range(30):
-        p1 = all_parents[randint(0, size)]
-        p2 = all_parents[randint(0, size)]
+        p1 = all_parents[randint(0, size - 1)]
+        p2 = all_parents[randint(0, size - 1)]
 
         tuple_list.append((p1[i], p2[i]))
 
