@@ -12,6 +12,13 @@ def generateIndivI():
         indiv.append(round(random.randint(-15, 15), 5))
 
     return indiv
+
+def removeFit(pop):
+    res =[]
+    for e in pop:
+        res.append(e[0])
+    return res
+
 def generateIndiv():
     n = 30
     chromossome= []
@@ -29,13 +36,20 @@ def generatePop(size):
     return pop
 
 def generateChildren(parents,childrenCount):
+    bareParents = removeFit(parents)
     children = []
-    child = []
-    while (len(children)):
-        #child = crossover()
+    childrenList = []
+    while (len(children)<childrenCount):
+        print(parents)
+        child = cross.recombination_all_parents(bareParents)
         #child = mutation()
         children.append(child)
 
+    for c in children:
+        childrenList.append([c,fitness(c)])
+
+    childrenList = sorted(childrenList, key=itemgetter(1))
+    return
 
 def fitness(chromossome):
     c1=20
@@ -55,14 +69,17 @@ def fitness(chromossome):
 
 def EEAckley():
 
-    childrenCount = 10
-    parentCount = 70
+    childrenCount = 70
+    parentCount = 10
+    generationCount = 0
     condSaida = False
     parents = generatePop(parentCount) # Populacao inicial
 
     while(condSaida == False):
-
-        childrens = generateChildren(parents,childrenCount)
+        generationCount+=1
+        children = generateChildren(parents,childrenCount)
+        #print(removeFit(parents))
+        condSaida=True
 
 
     return
