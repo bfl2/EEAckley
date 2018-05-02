@@ -4,6 +4,11 @@ import random
 import numpy as np
 from operator import itemgetter
 
+def removeFit(pop):
+    res =[]
+    for e in pop:
+        res.append(e[0])
+    return res
 
 def generateIndivI():
     n = 30
@@ -13,11 +18,6 @@ def generateIndivI():
 
     return indiv
 
-def removeFit(pop):
-    res =[]
-    for e in pop:
-        res.append(e[0])
-    return res
 
 def generateIndiv():
     n = 30
@@ -40,7 +40,6 @@ def generateChildren(parents,childrenCount):
     children = []
     childrenList = []
     while (len(children)<childrenCount):
-        print(parents)
         child = cross.recombination_all_parents(bareParents)
         #child = mutation()
         children.append(child)
@@ -49,7 +48,7 @@ def generateChildren(parents,childrenCount):
         childrenList.append([c,fitness(c)])
 
     childrenList = sorted(childrenList, key=itemgetter(1))
-    return
+    return childrenList
 
 def fitness(chromossome):
     c1=20
@@ -65,6 +64,11 @@ def fitness(chromossome):
     fit = -c1*np.exp(-c2*np.sqrt(sum1)) - np.exp(sum2) + c1 + 1
     return round(fit,5)
 
+def getAvgFit(pop):
+    sum = 0
+    for c in pop:
+        sum+=c[1]
+    return sum/len(pop)
 
 
 def EEAckley():
@@ -74,12 +78,19 @@ def EEAckley():
     generationCount = 0
     condSaida = False
     parents = generatePop(parentCount) # Populacao inicial
+    minFit = parents[0][1]
 
     while(condSaida == False):
         generationCount+=1
         children = generateChildren(parents,childrenCount)
-        #print(removeFit(parents))
-        condSaida=True
+        parents = children[:parentCount]
+        minFit = parents[0][1]
+        avgFit = getAvgFit(parents)
+
+        print("Avg Fitness:{} / Max Fitness:{}".format( avgFit,minFit))
+
+        if(generationCount>10):
+            condSaida=True
 
 
     return
