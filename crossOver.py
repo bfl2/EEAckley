@@ -25,8 +25,9 @@ def recombination_all_parents(all_parents):
 
     tuple_list = []
     size = len(all_parents)
+    num_gene = len(all_parents[0])
 
-    for i in range(30):
+    for i in range(num_gene):
         p1 = all_parents[randint(0, size - 1)]
         p2 = all_parents[randint(0, size - 1)]
 
@@ -42,8 +43,9 @@ def recombination_all_random(all_parents):
 
     tuple_list = []
     size = len(all_parents)
+    num_gene = len(all_parents[0])
 
-    for i in range(30):
+    for i in range(num_gene):
         p1 = all_parents[randint(0, size - 1)]
         p2 = all_parents[randint(0, size - 1)]
 
