@@ -26,6 +26,7 @@ def generateIndiv():
         chromossome.append(round(random.uniform(-15, 15), 5))
     fit = fitness(chromossome)
     indiv = [chromossome,fit]
+
     return indiv
 
 def generatePop(size):
@@ -35,19 +36,36 @@ def generatePop(size):
     pop = sorted(pop, key=itemgetter(1))
     return pop
 
-def generateChildren(parents,childrenCount):
-    bareParents = removeFit(parents)
+def get2RandomParents(allParents):
+    indivSize = 30
+    print("indivSize ", indivSize)
+    i1 =0
+    i2 =0
+    while(i1==i2):
+        i1 = random.randint(0,indivSize-1)
+        i2 = random.randint(0,indivSize-1)
+    parents = [allParents[i1],allParents[i2]]
+    return parents
+
+
+def generateChildren(allParents,childrenCount):
+    sigma = 0.01
     children = []
     childrenList = []
     while (len(children)<childrenCount):
-        child = cross.recombination_all_parents(bareParents)
-        #child = mutation()
+        parents = get2RandomParents(allParents)
+        child = cross.recombination_all_parents(parents)
+        ### A fazer, Analisar melhor como lidar com o formato [cromossomoL, fitness, sigma]
+        if(len(child)<3):
+            child = [child,sigma]
+        child = mut.mutation_case1(child)
         children.append(child)
 
+    ### Recalculando o fitness dos filhos, assumindo que os filhos estao no formato [cromossomo, fitness, sigma]
     for c in children:
-        childrenList.append([c,fitness(c)])
-
+        c[1] = fitness(c)
     childrenList = sorted(childrenList, key=itemgetter(1))
+    print("children 1 len{}-{}".format(len(childrenList[0][0]),childrenList[0]))
     return childrenList
 
 def fitness(chromossome):
@@ -61,7 +79,7 @@ def fitness(chromossome):
         sum2+= np.cos(c3*xi)
     sum1 = sum1/len(chromossome)
     sum2 = sum2/len(chromossome)
-    fit = -c1*np.exp(-c2*np.sqrt(sum1)) - np.exp(sum2) + c1 + 1
+    fit = -c1*np.exp(-c2*np.sqrt(sum1)) - np.exp(sum2) + c1 + np.e
     return round(fit,5)
 
 def getAvgFit(pop):
@@ -73,27 +91,36 @@ def getAvgFit(pop):
 
 def EEAckley():
 
-    childrenCount = 70
-    parentCount = 10
+    childrenCount = 700
+    parentCount = 100
     generationCount = 0
     condSaida = False
     parents = generatePop(parentCount) # Populacao inicial
     minFit = parents[0][1]
 
+    ##Listas de saida
+    minFitList =[]
+    avgFitList =[]
+
+
     while(condSaida == False):
-        generationCount+=1
+
         children = generateChildren(parents,childrenCount)
         parents = children[:parentCount]
         minFit = parents[0][1]
         avgFit = getAvgFit(parents)
 
-        print("Avg Fitness:{} / Max Fitness:{}".format( avgFit,minFit))
+        print("Geracao:{} Avg Fitness:{} / Max Fitness:{}".format(generationCount, avgFit,minFit))
+        minFitList.append(minFit)
+        avgFitList.append(avgFit)
 
-        if(generationCount>10):
+        if(generationCount>40):
             condSaida=True
+        generationCount += 1
 
-
-    return
+    dataset = {"avgFitList":avgFitList, "minFitList":minFitList,"generation":generationCount,"minFit":minFit}
+    print("Best solution{}-{}".format(len (parents[0][0]),parents[0][0]))
+    return dataset
 
 
 if __name__ == "__main__":
