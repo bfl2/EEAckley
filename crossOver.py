@@ -1,6 +1,19 @@
 ﻿from random import randint
-froom EEAckley import fitness
+import numpy as np
 
+def fitness(chromossome):
+    c1=20
+    c2=0.2
+    c3=2*np.pi
+    sum1 = 0
+    sum2 = 0
+    for xi in chromossome:
+        sum1+= xi**2
+        sum2+= np.cos(c3*xi)
+    sum1 = sum1/len(chromossome)
+    sum2 = sum2/len(chromossome)
+    fit = -c1*np.exp(-c2*np.sqrt(sum1)) - np.exp(sum2) + c1 + np.e
+    return round(fit,5)
 
 #   Input Format ([Chromosome, Fitness, sigma])
 def recombination_2fixed_parents(parent1, parent2):
