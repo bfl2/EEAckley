@@ -55,7 +55,7 @@ def generateChildren(allParents,childrenCount):
     while (len(children)<childrenCount):
         parents = get2RandomParents(allParents)
         child = cross.recombination_2fixed_parents(parents[0],parents[1])
-        child[2] = sigma
+        #child[2] = sigma
         child = mut.mutation_case1(child)
         children.append(child)
     childrenList = sorted(children, key=itemgetter(1))
