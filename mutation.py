@@ -34,7 +34,7 @@ def mutation_case1(indiv):###entrada eh uma lista da forma [cromossomo,fitness, 
         mutationed.append(xi + sigma_line * N(0, 1))
 
     ### Mutacao tem que retornar individuo no formato: [cromossomo, fitness, sigma]
-    mutationedF = [mutationed, fitness(mutationed), sigma]
+    mutationedF = [mutationed, fitness(mutationed), sigma_line]
 
     return mutationedF
 
