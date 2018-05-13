@@ -46,8 +46,8 @@ def mutation_case2(indiv):
     n = len(chromosome) 
 
     epson_0 = 0.2
-    learning_rate = (2*(n**(-1/2)))**(-1/2)
-    learning_rate_line = (2*n**(-1/2))**(-1/2) 
+    learning_rate = 1/sqrt(2*n)
+    learning_rate_line = 1/sqrt(2*sqrt(n))
     
     var_fix = N(0,1)
     sigma_line = []
