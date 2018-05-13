@@ -69,7 +69,7 @@ def recombination_2fixed_random(parent1, parent2):
     zip_sigmas = zip(sigma_1, sigma_2)
 
     child = [x[randint(0, 1)] for x in zip_parents]
-    sigma_child = [(s[0] + s[1]) / 2 for s in zip_sigmas]
+    sigma_child = [s[randint(0, 1)] for s in zip_sigmas]
 
     fitness_child = fitness(child)
 
