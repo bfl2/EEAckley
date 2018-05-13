@@ -34,7 +34,7 @@ def plotGraf():
     y = dataset["minFitList"]
     print(len(x), len(y))
     axes[0, 1].plot(x, y)
-    axes[0, 1].set_title("Fitness Minimo da versao 2")
+    axes[0, 1].set_title("Fitness Minimo da versao 1")
     axes[0, 1].set_ylabel("Fitness Minimo")
     axes[0, 1].set_xlabel("Geracao")
 
@@ -53,7 +53,7 @@ def plotGraf():
     y = dataset["minFitList"]
     print(len(x), len(y))
     axes[1, 1].plot(x, y)
-    axes[1, 1].set_title("Fitness Minimo da versao 1")
+    axes[1, 1].set_title("Fitness Minimo da versao 2")
     axes[1, 1].set_ylabel("Fitness Minimo")
     axes[1, 1].set_xlabel("Geracao")
 
