@@ -38,6 +38,36 @@ def mutation_case1(indiv):###entrada eh uma lista da forma [cromossomo,fitness, 
 
     return mutationedF
 
+#essa funcao implementa a segunda versao da estrategia evolutica considerando sigmas independentes
+def mutation_case2(indiv):
+    chromosome = indiv[0]
+    sigma = indiv[-1]
+    mutationed = []
+    n = len(chromosome) 
+
+    epson_0 = 0.2
+    learning_rate = (2*(n**(-1/2)))**(-1/2)
+    learning_rate_line = (2*n**(-1/2))**(-1/2) 
+    
+    var_fix = N(0,1)
+    sigma_line = []
+    
+    for i in range(0,n): ###sigma nao eh o ultimo elemento da lista de cromossomo e sim do individuo
+        var_aleat = N(0,1)
+        
+        sigma_line.append(sigma[i]*exp((learning_rate_line * var_fix) + (learning_rate * var_aleat)))
+        
+        if sigma_line[i] < epson_0:
+            sigma_line[i] = epson_0
+            
+        mutationed.append(chromosome[i] + sigma_line[i] * var_aleat)
+
+    ### Mutacao tem que retornar individuo no formato: [cromossomo, fitness, sigma]
+    mutationedF = [mutationed, fitness(mutationed), sigma_line]
+
+    return mutationedF
+
+
 if __name__ == '__main__':
 
     print(mutation_case1(list(range(31))))
