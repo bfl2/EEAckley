@@ -36,8 +36,9 @@ def generateIndiv():
 #gera os individuos para o caso do vetor de sigmas
 def generateIndiv2():
     n = 30
-    sigma = [5]*n
+    sigma = [round(random.uniform(-15, 15), 5) for x in range(30)]
     chromossome= []
+
     while (len( chromossome) < n):
         chromossome.append(round(random.uniform(-15, 15), 5))
     fit = fitness(chromossome)
