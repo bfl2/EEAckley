@@ -4,11 +4,13 @@ import random
 import numpy as np
 from operator import itemgetter
 
+
 def removeFit(pop):
     res =[]
     for e in pop:
         res.append(e[0])
     return res
+
 
 def generateIndivI():
     n = 30
@@ -29,18 +31,20 @@ def generateIndiv():
     indiv = [chromossome,fit,sigma]
 
     return indiv
-    
+
+
 #gera os individuos para o caso do vetor de sigmas
 def generateIndiv2():
     n = 30
-    sigma = [0.1]*n
+    sigma = [5]*n
     chromossome= []
     while (len( chromossome) < n):
         chromossome.append(round(random.uniform(-15, 15), 5))
     fit = fitness(chromossome)
-    indiv = [chromossome,fit,sigma]
+    indiv = [chromossome, fit, sigma]
 
     return indiv
+
 
 def generatePop(size):
     pop = []
@@ -48,6 +52,7 @@ def generatePop(size):
         pop.append(generateIndiv2())
     pop = sorted(pop, key=itemgetter(1))
     return pop
+
 
 def get2RandomParents(allParents):
     lenParents = len(allParents)
@@ -66,7 +71,7 @@ def generateChildren(allParents,childrenCount):
     childrenList = []
     while (len(children)<childrenCount):
         parents = get2RandomParents(allParents)
-        child = cross.recombination_2fixed_parents(parents[0],parents[1])
+        child = cross.recombination_2fixed_parents(parents[0], parents[1])
         #child = cross.recombination_all_random(allParents)
         #child = cross.recombination_all_parents(allParents)
         #child[2] = sigma
@@ -76,6 +81,7 @@ def generateChildren(allParents,childrenCount):
 
 
     return childrenList
+
 
 def fitness(chromossome):
     c1=20
