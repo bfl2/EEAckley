@@ -108,7 +108,7 @@ def getAvgFit(pop):
 def EEAckley2():
 
     childrenCount = 200 
-    parentCount = 10
+    parentCount = 30
     generationCount = 0
     condSaida = False
     parents = generatePop(parentCount) # Populacao inicial
