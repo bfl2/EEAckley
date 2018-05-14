@@ -49,13 +49,14 @@ def get2RandomParents(allParents):
 
 
 def generateChildren(allParents,childrenCount):
-    sigma = 0.001
+    sigma = -0.01
     children = []
     childrenList = []
     while (len(children)<childrenCount):
         parents = get2RandomParents(allParents)
         child = cross.recombination_2fixed_parents(parents[0],parents[1])
-        #child[2] = sigma
+        #child =parents[0]
+        child[2] = sigma
         child = mut.mutation_case1(child)
         children.append(child)
     childrenList = sorted(children, key=itemgetter(1))
@@ -109,14 +110,17 @@ def EEAckley():
         minFitList.append(minFit)
         avgFitList.append(avgFit)
 
-        if(generationCount>1000):
+        if(generationCount>200):
             condSaida=True
         generationCount += 1
 
-    dataset = {"avgFitList":avgFitList, "minFitList":minFitList,"generation":generationCount,"minFit":minFit}
+    bestIndiv = parents[0][0]
+    dataset = {"avgFitList": avgFitList, "minFitList": minFitList, "generationCount": generationCount, "minFit": minFit, "avgFit": avgFit, "bestIndiv": bestIndiv}
     print("Best solution n={}//Fitness={} {}".format(len (parents[0][0]),parents[0][1],parents[0][0]))
     return dataset
 
 
 if __name__ == "__main__":
     EEAckley()
+    #a = [0.1]*30
+    #print("fitness",fitness(a))
