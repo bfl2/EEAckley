@@ -107,7 +107,7 @@ def getAvgFit(pop):
 
 def EEAckley2():
 
-    childrenCount = 70
+    childrenCount = 200 
     parentCount = 10
     generationCount = 0
     condSaida = False
@@ -129,6 +129,11 @@ def EEAckley2():
         print("Geracao:{} Tamanho da populacao de pais:{} Avg Fitness:{} / Min Fitness:{}".format(generationCount,len(parents), round(avgFit,5),round(minFit,5)))
         minFitList.append(minFit)
         avgFitList.append(avgFit)
+
+        #if(generationCount%10 == 0):
+        #    print("population sigma values")
+        #    print([i[2] for i in parents])
+
 
         if(generationCount>1000):
             condSaida=True

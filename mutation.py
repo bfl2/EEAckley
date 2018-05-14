@@ -15,7 +15,7 @@ def fitness(chromossome): ### Entrada eh uma lista com 30 floats
     sum1 = sum1/len(chromossome)
     sum2 = sum2/len(chromossome)
     fit = -c1*np.exp(-c2*np.sqrt(sum1)) - np.exp(sum2) + c1 + np.e
-    return round(fit,5)
+    return round(fit,10)
 
 def mutation_case1(indiv):###entrada eh uma lista da forma [cromossomo,fitness, sigma] Onde cromossomo eh uma lista e fitness e sigma sao floats
     chromosome = indiv[0]
@@ -42,10 +42,10 @@ def mutation_case1(indiv):###entrada eh uma lista da forma [cromossomo,fitness, 
 def mutation_case2(indiv):
     chromosome = indiv[0]
     sigma = indiv[-1]
-    mutationed = []
+    mutationed = chromosome[:]
     n = len(chromosome) 
 
-    epson_0 = 0.2
+    epson_0 = 0.0001 
     learning_rate = 1/sqrt(2*n)
     learning_rate_line = 1/sqrt(2*sqrt(n))
     
@@ -60,7 +60,11 @@ def mutation_case2(indiv):
         if sigma_line[i] < epson_0:
             sigma_line[i] = epson_0
             
-        mutationed.append(chromosome[i] + sigma_line[i] * var_aleat)
+        mutationed[i] = (chromosome[i] + sigma_line[i] * var_aleat)
+        aux = fitness(mutationed)
+        if(aux > indiv[1]):
+            mutationed[i] = chromosome[i]
+
 
     ### Mutacao tem que retornar individuo no formato: [cromossomo, fitness, sigma]
     mutationedF = [mutationed, fitness(mutationed), sigma_line]
@@ -71,3 +75,4 @@ def mutation_case2(indiv):
 if __name__ == '__main__':
 
     print(mutation_case1(list(range(31))))
+    print(fitness([float[i] for i in range[30]]))
