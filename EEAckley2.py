@@ -135,11 +135,11 @@ def EEAckley2():
         #    print([i[2] for i in parents])
 
 
-        if(generationCount>1000):
+        if(generationCount>20):
             condSaida=True
         generationCount += 1
 
-    dataset = {"avgFitList":avgFitList, "minFitList":minFitList,"generation":generationCount,"minFit":minFit}
+    dataset = {"avgFitList":avgFitList, "minFitList":minFitList,"generationCount":generationCount,"minFit":minFit, "avgFit":avgFit}
     print("Best solution n={}//Fitness={} {}".format(len (parents[0][0]),parents[0][1],parents[0][0]))
     return dataset
 
