@@ -109,10 +109,10 @@ def EEAckley():
         print("Geracao:{} Tamanho da populacao de pais:{} Avg Fitness:{} / Min Fitness:{}".format(generationCount,len(parents), round(avgFit,5),round(minFit,5)))
         minFitList.append(minFit)
         avgFitList.append(avgFit)
-
+        generationCount += 1
         if(generationCount>200):
             condSaida=True
-        generationCount += 1
+
 
     bestIndiv = parents[0][0]
     dataset = {"avgFitList": avgFitList, "minFitList": minFitList, "generationCount": generationCount, "minFit": minFit, "avgFit": avgFit, "bestIndiv": bestIndiv}

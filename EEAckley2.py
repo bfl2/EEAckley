@@ -134,10 +134,10 @@ def EEAckley2():
         #    print("population sigma values")
         #    print([i[2] for i in parents])
 
-
+        generationCount += 1
         if(generationCount>200):
             condSaida=True
-        generationCount += 1
+
 
     bestIndiv = parents[0][0]
     dataset = {"avgFitList":avgFitList, "minFitList":minFitList,"generationCount":generationCount,"minFit":minFit, "avgFit":avgFit,"bestIndiv":bestIndiv}
